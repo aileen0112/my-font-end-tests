@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+function Person(name, sex){
+	this.name = name;
+	this.sex = sex;
+}
+
+Person.prototype.showName = function(){
+	alert(this.name);
+};
+
+Person.prototype.showSex = function(){
+	alert(this.sex);	
+};
+
+function Worker(name, sex, job){
+	//继承属性
+	//调用父级构造函数 -- 构造函数伪装
+	Person.call(this, name, sex);
+	this.job = job;
+}
+//继承方法
+//通过原型继承父类方法 -- 原型链
+//问题 ： person也有了showJob方法
+//Worker.prototype=Person.prototype;
+//改写
+for(var i in Person.prototype){
+	Worker.prototype[i] = Person.prototype[i];
+}
+
+Worker.prototype.showJob=function(){
+	alert(this.job);
+};
+
+var p1 = new Person('alice','girl');
+var w1 = new Worker('bob', 'boy', 'student');
+
+p1.showName();
+p1.showSex();
+
+w1.showName();
+w1.showSex();
+w1.showJob();
+/*var p1 = new Person('alice','girl');
+p1.showName();
+p1.showSex();*/
+</script>
+</body>
+</html>

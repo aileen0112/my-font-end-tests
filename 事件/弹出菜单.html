@@ -1,0 +1,35 @@
+<!-- 点击按钮显示div,点击页面div消失-->
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<style>
+	#div1 {width:100px; height:250px; background:#ccc; display:none;}
+	</style>
+</head>
+<body>
+	<input type="button" value="显示" id="btn1"/>
+	<div id="div1">
+	</div>
+
+	<script>
+		window.onload = function(){
+			var oBtn = document.getElementById("btn1");
+			var oDiv = document.getElementById("div1");
+			
+			oBtn.onclick = function(ev) {
+				var oEvent = ev||event;
+				oDiv.style.display="block";
+				//阻止事件冒泡
+				oEvent.cancelBubble = true;
+			};
+
+			document.onclick = function() {
+				oDiv.style.display="none";
+			}
+
+		};
+
+	</script>
+</body>
+</html>

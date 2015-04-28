@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+
+function SuperType(name){
+	this.name = name;
+	this.colors = ["red", "blue", "yellow"];
+}
+SuperType.prototype.sayName = function(){
+	alert(this.name);
+};
+
+//继承
+function SubType(name, age){
+	//继承属性
+	SuperType.call(this, name);
+	
+	this.age = age;
+}
+//继承方法
+SubType.prototype = new SuperType();
+
+SubType.prototype.constructor = SubType;
+SubType.prototype.sayAge = function(){
+	alert(this.age);
+};
+
+var instance1 = new SubType("alice","20");
+instance1.colors.push("pink");
+alert(instance1.colors);
+instance1.sayName();
+instance1.sayAge();
+
+var instance2 = new SubType("bob","18");
+alert(instance2.colors);
+instance2.sayName();
+instance2.sayAge();
+
+</script>
+</body>
+</html>

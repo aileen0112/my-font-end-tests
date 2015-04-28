@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+//在构造函数中定义特权方法
+function Person(value){
+	var name='ni';
+	
+	this.getName = function(){
+		return name;
+	}
+	this.setName= function(value){
+		name = value;	
+	};
+}
+
+var p = new Person("bob");
+alert(p.name); //undefinied -- 函数外不能调用私有变量
+alert(p.getName()); //ni -- 没有调用setName()，name没有传进去
+p.setName("alice");
+alert(p.getName()); //alice
+
+
+
+
+//静态私有变量 -- 在私有作用域中定义
+//私有变量和函数是由实例共享的
+(function(){
+	var name = "";
+	
+	//函数表达式定义构造函数
+	//函数声明只能创建局部函数，而没有加var是未经声明的函数声明。
+	//初始化未经声明的变量，总是会创建一个全局变量
+	Person = function(value){
+		name = value;
+	};
+	
+	Person.prototype.getName = function(){
+		return name;
+	};
+	Person.prototype.setName = function(value){
+		name = value;
+	};
+})();
+
+var p1 = new Person("alice");
+alert(p1.name);  //undefined
+alert(p1.getName()); //alice
+p1.setName("bob");
+alert(p1.name);  //undefined
+alert(p1.getName()); //bob
+
+var p2 = new Person("third");
+alert(p2.getName()); //third -- 实例共享name变量
+alert(p1.getName()); //third 
+
+</script>
+</body>
+</html>

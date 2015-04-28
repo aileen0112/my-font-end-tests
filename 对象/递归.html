@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+function factorial(num){
+	if(num <= 1){
+		return 1;
+	}
+	else{
+		//return num*factorial(num-1);
+		return num*arguments.callee(num-1);
+	}
+}
+
+//闭包 -- 万能
+/*var factorial = ( function f(num){
+	if(num <= 1){
+		return 1;
+	}
+	else{
+		return num*f(num-1);
+	}
+});*/
+
+alert(Object.getPrototypeOf(factorial)); //function
+var prototype = Object.getPrototypeOf(factorial)
+alert(Object.getPrototypeOf(prototype)); //object
+
+var anotherFactorial = factorial;
+factorial = null;
+alert(anotherFactorial(4));
+</script>
+</body>
+</html>

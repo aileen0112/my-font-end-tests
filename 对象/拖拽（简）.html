@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>拖拽div</title>
+<style>
+#div1 {width:100px; height:100px; background:red; position:absolute;}
+</style>
+<script>
+window.onload=function() {
+	new Drag('div1');
+};
+
+function Drag(id) {
+	var _this=this;
+	this.oDiv = document.getElementById(id),
+	//鼠标和div的距离
+	this.disX=0,
+	this.disY=0
+
+	this.oDiv.onmousedown = function(){
+		_this.fnDown();
+	}
+}
+
+	
+Drag.prototype.fnDown = function (ev){
+	var oEvent = ev||event;
+	var _this = this;
+		
+	this.disX=oEvent.clientX-this.oDiv.offsetLeft;
+	this.disY=oEvent.clientY-this.oDiv.offsetTop;
+
+	document.onmousemove = function(){
+		_this.fnMove();
+	};
+	document.onmouseup = function(){
+		_this.fnUp();		
+	};
+};
+
+//鼠标按下之后才会触发mousemove
+//在div上加事件鼠标移动快的时候失效，可以再document上加事件
+Drag.prototype.fnMove = function(ev) {
+	var oEvent = ev||event;
+			
+	this.oDiv.style.left=oEvent.clientX-this.disX+'px';
+	this.oDiv.style.top=oEvent.clientY-this.disY+'px';
+};
+
+//鼠标抬起停止拖拽
+Drag.prototype.fnUp = function() {
+	document.onmousemove=null;
+	document.onmouseup=null;
+};
+	
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>

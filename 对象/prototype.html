@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+
+ function Person( ){  
+ }
+ //person1为原型改写前先创建的实例，其prototype指向改写前的Person.prototype，故不拥有新的属性和方法
+ //person1.constructor指向Person
+   var person1 = new Person();
+   
+ Person.prototype = {
+	 name : "alice",
+	 age : "20",
+	 show  : function(){           
+			alert(this.name+this.age); 
+	}
+ }
+ 
+ function Someone(){
+ }
+//原型改写后相当于新创建了一个对象，Person.prototype的constructor属性指向Object的构造函数
+//person2为原型改写后创建的实例，person2.constructor指向新创建的prototype而不指向Person
+  var person2 = new Person();
+  
+  //alert(person1.name);
+  //alert(Person.prototype.show());
+  
+  //已对象字面量方式重写prototype,测试prototype.constructor指向哪里 -- Object
+  /*alert(Person.prototype.constructor == Person); //false
+  alert(Object.getPrototypeOf(person1).constructor == Person); //false
+  alert(Object.getPrototypeOf(person1).constructor == person1);  //false
+  alert(Someone.prototype.prototype); //undefinied
+  alert(Person.prototype.prototype); //undefinied*/
+  alert(person1.constructor == Person); //True
+  alert(person2.constructor == Person); //false
+  alert(person2.constructor == Object); //true
+  
+</script>
+</body>
+</html>

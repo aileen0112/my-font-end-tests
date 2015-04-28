@@ -1,0 +1,30 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<style>
+	#div1 {height: 200px; width:100px; background: red;}
+</style>
+</head>
+<body>
+	<ul id='ul1'>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	
+
+<script>
+window.onload = function() {
+	var oUl = document.getElementById('ul1');
+
+	for(var i=0; i<oUl.childNodes.length; i++){
+		//1为元素节点
+		if(oUl.childNodes[i].nodeType == 1){
+			oUl.childNodes[i].style.background="red";
+		}
+	}
+}
+</script>
+</body>
+</html>

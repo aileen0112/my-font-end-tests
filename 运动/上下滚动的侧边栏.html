@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>上下滚动的侧边栏</title>
+<style>
+body {height:2000px;}
+#div1 {width:100px; height:100px; background:red; position:absolute; right:0;}
+</style>
+</head>
+
+<body >
+<div id="div1"></div>
+
+<script>
+window.onscroll = function() {
+	var oDiv = document.getElementById('div1');
+	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	
+	oDiv.style.top = scrollTop+(document.documentElement.clientHeight-oDiv.clientHeight)/2+'px';
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<style>
+	#div1 {height: 200px; width:100px; background: red;}
+</style>
+</head>
+<body>
+	<input  id="text1" type="text" />
+	<input  id="btn1" type="button" value="普通"/>
+
+	<ul id="ul1">
+	</ul>
+
+	<ul id="ul2">	
+	</ul>
+
+<script>
+window.onload = function() {
+	var oBtn = document.getElementById("btn1");
+	var oUl = document.getElementById("ul1");
+
+	oBtn.onclick = function() {
+		
+		var iStart = new Date().getTime();
+		//文档碎片
+		var oFrag = document.createDocumentFragment();
+		var i=0;
+
+		for(i=0; i<100000; i++){
+			var oLi = document.createElement("li");
+			oFrag.appendChild(oLi);
+		}
+		oUl.appendChild(oFrag);
+		alert(new Date().getTime()-iStart);
+	}
+
+
+	var oUl2 = document.getElementById("ul2");
+	var aA = document.getElementsByTagName("a");
+	for(var i=0; i<aA.length; i++){
+		aA[i].onclick= function() {
+			oUl2.removeChild(this.parentNode);
+		}
+	}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+function createFunctions1(){
+	var result = new Array();
+	
+	for(var i=0; i<10; i++){
+		result[i] = function(){
+			return i;
+		};
+	}
+	return result;
+}
+
+var f1 = createFunctions1();
+var result = f1[0]();
+alert(result);  //10
+
+function createFunctions2(){
+	var result = new Array();
+	
+	for(var i=0; i<10; i++){
+		result[i] = function(num){
+			return num;
+		}(i);
+	}
+	return result;
+}
+
+var f2 = createFunctions2();
+//返回给result[i]的是已经执行完的结果，以下调用错误
+//var result2 = f2[0]();
+var result2 = f2[0];
+alert(result2);  
+
+
+
+function createFunctions3(){
+	var result = new Array();
+	
+	for(var i=0; i<10; i++){
+		result[i] = function(num){
+			//返回一个方法
+			return function(){
+				return num;
+			};
+		}(i);
+	}
+	return result;
+}
+
+var f3 = createFunctions3();
+var result3 = f3[0]();
+alert(result3); 
+</script>
+</body>
+</html>

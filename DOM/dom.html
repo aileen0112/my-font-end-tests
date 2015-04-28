@@ -1,0 +1,58 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<style>
+	#div1 {height: 200px; width:100px; background: red;}
+</style>
+</head>
+<body>
+	<input  id="text1" type="text" />
+	<input  id="btn1" type="button" value="创建li"/>
+	<ul id="ul1">
+		<li>aaa</li>
+	</ul>
+
+	<ul id="ul2">
+		<li>asdfdf<a href="#">删除</a></li>
+		<li>bsdfdf<a href="#">删除</a></li>
+		<li>csdfdf<a href="#">删除</a></li>
+		<li>dsdfdf<a href="#">删除</a></li>
+		<li>esdfdf<a href="#">删除</a></li>
+	</ul>
+
+<script>
+window.onload = function() {
+	var oBtn = document.getElementById("btn1");
+	var oUl = document.getElementById("ul1");
+	var oText = document.getElementById("text1");
+
+	oBtn.onclick = function() {
+		var oLi = document.createElement("li");
+		var aLi = oUl.getElementsByTagName("li");
+		oLi.innerHTML=oText.value;
+
+		//在后面插入li
+		//oUl.appendChild(oLi);
+
+		//在头部插入li
+		if(aLi.length>0){
+			oUl.insertBefore(oLi,aLi[0]);
+		}
+		else{
+			oUl.appendChild(oLi);
+		}
+	}
+
+
+	var oUl2 = document.getElementById("ul2");
+	var aA = document.getElementsByTagName("a");
+	for(var i=0; i<aA.length; i++){
+		aA[i].onclick= function() {
+			oUl2.removeChild(this.parentNode);
+		}
+	}
+}
+</script>
+</body>
+</html>

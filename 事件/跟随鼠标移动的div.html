@@ -1,0 +1,25 @@
+<!-- 点击按钮显示div,点击页面div消失-->
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<style>
+	#div1 {width:100px; height:100px; background:red; position:absolute;}
+	</style>
+</head>
+<body>
+	<div id="div1">
+	</div>
+
+	<script>
+		document.onmousemove = function(ev){
+			var oEvent = ev || event;
+			var oDiv = document.getElementById("div1");
+
+			oDiv.style.left = oEvent.clientX+'px'; 
+			oDiv.style.top = oEvent.clientY+'px'; 
+		};
+
+	</script>
+</body>
+</html>
